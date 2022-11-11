@@ -1,15 +1,15 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h1>Sign up for the newsletter!</h1>
+  <NewsletterForm />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import NewsletterForm from './components/NewsletterForm.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    NewsletterForm
   }
 }
 </script>
@@ -17,8 +17,6 @@ export default {
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
