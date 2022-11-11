@@ -1,16 +1,16 @@
 <template>
     <form>
 
-        <label for="name">Name </label>
-        <input type="text" id="name" name="name" placeholder="Your name..." required>
+        <label for="name">Name: {{ name }}</label>
+        <input v-model="name" type="text" id="name" name="name" placeholder="Your name..." required>
 
 
-        <label for="surname">Surname </label>
-        <input type="text" id="surname" name="surname" placeholder="Your surname..." required>
+        <label for="surname">Surname: {{ surname }}</label>
+        <input v-model="surname" type="text" id="surname" name="surname" placeholder="Your surname..." required>
 
 
-        <label for="email">Email </label>
-        <input type="text" id="email" name="email" placeholder="Your email..." required>
+        <label for="email">Email: {{ email }}</label>
+        <input v-model="email" type="text" id="email" name="email" placeholder="Your email..." required>
 
         <label for="numberOfEmails">How many emails per week do you want to receive from us? </label>
         <select id="numberOfEmails" name="numberOfEmails">
@@ -26,7 +26,14 @@
 
 <script>
 export default {
-    name: 'NewsletterForm'
+    name: 'NewsletterForm',
+    data: function () {
+        return {
+            name: this.name,
+            surname: this.surname,
+            email: this.email
+        }
+    }
 }
 </script>
 
@@ -37,7 +44,8 @@ form {
     padding: 20px;
 }
 
-input[type=text], select {
+input[type=text],
+select {
     width: 100%;
     padding: 10px 10px;
     margin: 8px;
