@@ -1,5 +1,5 @@
 <template>
-    <form>
+    <form @submit="checkForm">
 
         <label for="name">Name: {{ name }}</label>
         <input v-model="name" type="text" id="name" name="name" placeholder="Your name..." required>
@@ -10,6 +10,7 @@
 
 
         <label for="email">Email: {{ email }}</label>
+        <p v-if="errors.length">Please type an email with an '@'</p>
         <input v-model="email" type="text" id="email" name="email" placeholder="Your email..." required>
 
         <label for="numberOfEmails">How many emails per week do you want to receive from us? </label>
@@ -18,8 +19,7 @@
             <option value="2">2</option>
             <option value="3">3</option>
         </select>
-
-        <input type="submit" value="Submit">
+        <button type="submit" value="Submit">Submit</button>
 
     </form>
 </template>
@@ -31,7 +31,30 @@ export default {
         return {
             name: this.name,
             surname: this.surname,
-            email: this.email
+            email: this.email,
+            errors: []
+        }
+    },
+    methods: {
+        checkForm: function (e) {
+            this.errors = [];
+
+            if (!this.name) {
+                this.errors.push('Name required.');
+            }
+            if (!this.surname) {
+                this.errors.push('Surname required.');
+            }
+            if (!this.email) {
+                this.errors.push('Email required.');
+            }
+            if (!this.email.includes('@')) {
+                this.errors.push('Email has to have @')
+            } else {
+                return true
+            }
+
+            e.preventDefault();
         }
     }
 }
@@ -60,7 +83,7 @@ select {
     width: 12%;
 }
 
-input[type=submit] {
+button {
     width: 100%;
     background-color: #50b7c4;
     color: white;
