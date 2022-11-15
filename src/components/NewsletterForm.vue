@@ -1,4 +1,6 @@
 <template>
+
+    <h1>Sign up for the newsletter!</h1>
     <form @submit="checkForm">
 
         <label for="name">Name: {{ name }}</label>
@@ -32,7 +34,7 @@ export default {
             name: this.name,
             surname: this.surname,
             email: this.email,
-            errors: []
+            errors: [],
         }
     },
     methods: {

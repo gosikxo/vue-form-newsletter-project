@@ -1,6 +1,11 @@
 <template>
-  <h1>Sign up for the newsletter!</h1>
-  <NewsletterForm />
+  <div v-if="firstPage">
+    <NewsletterForm />
+  </div>
+  <div v-if="secondPage">
+    <h1>Thank you for signing up for our newsletter. We'll be in touch!</h1>
+    <img src="@/assets/kitty.png" />
+  </div>
 </template>
 
 <script>
@@ -10,6 +15,12 @@ export default {
   name: 'App',
   components: {
     NewsletterForm
+  },
+  data: function () {
+    return {
+      firstPage: true,
+      secondPage: false
+    };
   }
 }
 </script>
