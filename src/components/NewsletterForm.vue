@@ -21,7 +21,7 @@
             <option value="2">2</option>
             <option value="3">3</option>
         </select>
-        <button type="submit" value="Submit">Submit</button>
+
 
     </form>
 </template>
@@ -57,17 +57,17 @@ export default {
             }
 
             e.preventDefault();
+        },
+
+        submitForm: function () {
+
+
         }
     }
 }
 </script>
 
 <style scoped>
-form {
-    background-color: rgb(234, 232, 232);
-    border-radius: 5px;
-    padding: 20px;
-}
 
 input[type=text],
 select {
@@ -83,16 +83,5 @@ select {
 
 select {
     width: 12%;
-}
-
-button {
-    width: 100%;
-    background-color: #50b7c4;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
 }
 </style>
