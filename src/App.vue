@@ -1,31 +1,74 @@
 <template>
   <div class="firstPage" v-if="firstPage">
-    <NewsletterForm />
-    <button @click="submitForm" type="submit" value="Submit">Submit</button>
+    <h1>Sign up for the newsletter!</h1>
+    <form @submit="this.checkForm">
+
+      <label for="name">Name: {{ name }}</label>
+      <input v-model="name" type="text" id="name" name="name" placeholder="Your name..." required>
+
+
+      <label for="surname">Surname: {{ surname }}</label>
+      <input v-model="surname" type="text" id="surname" name="surname" placeholder="Your surname..." required>
+
+
+      <label for="email">Email: {{ email }}</label>
+      <p v-if="errors.length">Please type an email with an '@'</p>
+      <input v-model="email" type="text" id="email" name="email" placeholder="Your email..." required>
+
+      <label for="numberOfEmails">How many emails per week do you want to receive from us? </label>
+      <select id="numberOfEmails" name="numberOfEmails">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+
+
+    </form>
+    <button @click.prevent="submitForm" type="submit" value="Submit">Submit</button>
   </div>
   <div v-if="secondPage">
-    <h1>Thank you for signing up for our newsletter. We'll be in touch!</h1>
+    <h1> Thank you for signing up for our newsletter. We'll be in touch!</h1>
     <img src="@/assets/kitty.png" />
   </div>
 </template>
 
 <script>
-import NewsletterForm from './components/NewsletterForm.vue';
+
 
 export default {
   name: 'App',
-  components: {
-    NewsletterForm
-  },
+
   data: function () {
     return {
       firstPage: true,
-      secondPage: false
+      secondPage: false,
+      name: this.name,
+      surname: this.surname,
+      email: this.email,
+      errors: [],
     }
   },
   methods: {
+    checkForm: function (e) {
+      this.errors = [];
+      if (!this.name) {
+        this.errors.push('Name required.');
+      }
+      if (!this.surname) {
+        this.errors.push('Surname required.');
+      }
+      if (!this.email) {
+        this.errors.push('Email required.');
+      }
+      if (!this.email.includes('@')) {
+        this.errors.push('Email has to have @')
+      } else {
+        return true
+      }
+
+      e.preventDefault();
+    },
     submitForm () {
-      console.log(this.firstPage, this.secondPage)
       this.firstPage = !this.firstPage
       this.secondPage = !this.secondPage
     }
@@ -45,6 +88,22 @@ export default {
   background-color: rgb(234, 232, 232);
   border-radius: 5px;
   padding: 20px;
+}
+
+input[type=text],
+select {
+  width: 100%;
+  padding: 10px 10px;
+  margin: 8px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+select {
+  width: 12%;
 }
 
 button {
