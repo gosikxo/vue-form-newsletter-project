@@ -1,5 +1,8 @@
 # vue-form-newsletter-project
 
+## Project site
+https://guileless-souffle-6cde31.netlify.app/
+
 ## Project setup
 ```
 npm install
