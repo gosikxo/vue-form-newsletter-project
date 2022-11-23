@@ -1,19 +1,19 @@
 <template>
-  <div class="firstPage" v-if="firstPage">
+  <div class="firstPage" v-if="currentPage == 'sign-up'">
     <h1>Sign up for the newsletter!</h1>
-    <form @submit="this.checkForm">
+    <form @submit="this.submitForm">
 
       <label for="name">Name: {{ name }}</label>
-      <input v-model="name" type="text" id="name" name="name" placeholder="Your name..." required>
-
+      <input :style="[!this.missingName ? { 'border': '1px solid #ccc' } : { 'border': '1px solid red' }]"
+        v-model="name" type="text" id="name" name="name" placeholder="Your name..." required>
 
       <label for="surname">Surname: {{ surname }}</label>
-      <input v-model="surname" type="text" id="surname" name="surname" placeholder="Your surname..." required>
-
+      <input :style="[!this.missingSurname ? { 'border': '1px solid #ccc' } : { 'border': '1px solid red' }]"
+        v-model="surname" type="text" id="surname" name="surname" placeholder="Your surname..." required>
 
       <label for="email">Email: {{ email }}</label>
-      <p v-if="errors.length">Please type an email with an '@'</p>
-      <input v-model="email" type="text" id="email" name="email" placeholder="Your email..." required>
+      <input :style="[!this.missingEmail ? { 'border': '1px solid #ccc' } : { 'border': '1px solid red' }]"
+        v-model="email" type="text" id="email" name="email" placeholder="Your email..." required>
 
       <label for="numberOfEmails">How many emails per week do you want to receive from us? </label>
       <select id="numberOfEmails" name="numberOfEmails">
@@ -22,12 +22,19 @@
         <option value="3">3</option>
       </select>
 
-
     </form>
     <button @click.prevent="submitForm" type="submit" value="Submit">Submit</button>
+    <div v-if="this.errors.length">
+      <b>Please correct the following error(s):</b>
+      <ul>
+        <li v-for="(error, index) in this.errors" v-bind:key="index">
+          {{ error }}
+        </li>
+      </ul>
+    </div>
   </div>
-  <div v-if="secondPage">
-    <h1>{{ this.secondPageName }}, thank you for signing up for our newsletter. We'll be in touch!</h1>
+  <div v-if="currentPage == 'success'">
+    <h1>{{ this.name }}, thank you for signing up for our newsletter. We'll be in touch!</h1>
     <img src="@/assets/kitty.png" />
   </div>
 </template>
@@ -40,39 +47,45 @@ export default {
 
   data: function () {
     return {
-      firstPage: true,
-      secondPage: false,
+      currentPage: 'sign-up',
       name: this.name,
       surname: this.surname,
       email: this.email,
       errors: [],
-      secondPageName: 'Name'
+      missingName: false,
+      missingSurname: false,
+      missingEmail: false
     }
   },
+
   methods: {
-    checkForm: function (e) {
+    checkForm: function () {
+
       this.errors = [];
       if (!this.name) {
-        this.errors.push('Name required.');
+        this.errors.push('Name required.')
+        this.missingName = true
       }
       if (!this.surname) {
-        this.errors.push('Surname required.');
+        this.errors.push('Surname required.')
+        this.missingSurname = true
       }
       if (!this.email) {
-        this.errors.push('Email required.');
+        this.errors.push('Email required.')
+        this.missingEmail = true
       }
       if (!this.email.includes('@')) {
         this.errors.push('Email has to have @')
-      } else {
-        return true
       }
+      return this.errors.length === 0
 
-      e.preventDefault();
+
     },
     submitForm () {
-      this.firstPage = !this.firstPage
-      this.secondPage = !this.secondPage
-      this.secondPageName = this.name
+      console.log(this.errors)
+      if (this.checkForm()) {
+        this.currentPage = "success"
+      }
     }
   }
 }
@@ -117,5 +130,9 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+li {
+  text-align: left;
 }
 </style>
