@@ -1,7 +1,7 @@
 # vue-form-newsletter-project
 
 ## Project site
-https://guileless-souffle-6cde31.netlify.app/
+https://whimsical-pastelito-40f40e.netlify.app/
 
 ## Project setup
 ```
