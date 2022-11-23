@@ -27,7 +27,7 @@
     <button @click.prevent="submitForm" type="submit" value="Submit">Submit</button>
   </div>
   <div v-if="secondPage">
-    <h1> Thank you for signing up for our newsletter. We'll be in touch!</h1>
+    <h1>{{ this.secondPageName }}, thank you for signing up for our newsletter. We'll be in touch!</h1>
     <img src="@/assets/kitty.png" />
   </div>
 </template>
@@ -46,6 +46,7 @@ export default {
       surname: this.surname,
       email: this.email,
       errors: [],
+      secondPageName: 'Name'
     }
   },
   methods: {
@@ -71,6 +72,7 @@ export default {
     submitForm () {
       this.firstPage = !this.firstPage
       this.secondPage = !this.secondPage
+      this.secondPageName = this.name
     }
   }
 }
