@@ -4,8 +4,8 @@
     <form @submit="this.submitForm">
 
       <label for="name">Name: {{ name }}</label>
-      <input :style="[!this.missingName ? { 'border': '1px solid #ccc' } : { 'border': '1px solid red' }]"
-        v-model="name" type="text" id="name" name="name" placeholder="Your name..." required>
+      <input :style="[!this.missingName ? { 'border': '1px solid #ccc' } : { 'border': '1px solid red' }]" v-model="name"
+        type="text" id="name" name="name" placeholder="Your name..." required>
 
       <label for="surname">Surname: {{ surname }}</label>
       <input :style="[!this.missingSurname ? { 'border': '1px solid #ccc' } : { 'border': '1px solid red' }]"
@@ -100,6 +100,8 @@ export default {
 }
 
 .firstPage {
+  width: 60%;
+  margin: auto;
   background-color: rgb(234, 232, 232);
   border-radius: 5px;
   padding: 20px;
