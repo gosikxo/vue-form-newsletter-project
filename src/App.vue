@@ -100,7 +100,7 @@ export default {
 }
 
 .firstPage {
-  width: 60%;
+  width: 50%;
   margin: auto;
   background-color: rgb(234, 232, 232);
   border-radius: 5px;
